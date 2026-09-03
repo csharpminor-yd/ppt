@@ -508,6 +508,20 @@
         object-fit: cover;
         object-position: center;
       }
+      .synergy-visual {
+        height: 68%;
+        margin-top: 2.3%;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .synergy-visual img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
       .tech-stack-layout {
         display: grid;
         grid-template-columns: 0.84fr 1.16fr;
@@ -625,6 +639,243 @@
         margin-bottom: 2%;
         color: #475467;
         font-size: 0.95em;
+      }
+      .delivery-layout {
+        display: grid;
+        grid-template-columns: 0.88fr 1.12fr;
+        gap: 2.8%;
+        height: 67%;
+        margin-top: 2.4%;
+      }
+      .delivery-overview {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 6%;
+        border-left: 4px solid var(--blue);
+        background: linear-gradient(135deg, #f5f7fa, #e8f2fb);
+      }
+      .delivery-kicker,
+      .capture-kicker {
+        margin-bottom: 5%;
+        color: var(--blue);
+        font-size: clamp(10px, 0.8vw, 13px);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .delivery-overview h2 {
+        margin: 0 0 5%;
+        color: #183f67;
+        font-size: clamp(20px, 1.8vw, 29px);
+        line-height: 1.22;
+        letter-spacing: -0.045em;
+      }
+      .delivery-overview p {
+        margin: 0;
+        color: #475467;
+        font-size: clamp(10px, 0.88vw, 14px);
+        line-height: 1.6;
+      }
+      .delivery-flow {
+        display: flex;
+        align-items: center;
+        gap: 2.5%;
+        margin-top: 6%;
+        color: #183f67;
+        font-size: clamp(9px, 0.76vw, 12px);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .delivery-flow span {
+        padding: 2.5% 3.5%;
+        background: #fff;
+      }
+      .delivery-flow i {
+        color: var(--blue);
+        font-size: 1.2em;
+        font-style: normal;
+      }
+      .md-spec-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3%;
+      }
+      .md-spec-item {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        justify-content: center;
+        padding: 6%;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .md-spec-item .md-index {
+        margin-bottom: 5%;
+        color: var(--blue);
+        font-size: clamp(10px, 0.8vw, 13px);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+      .md-spec-item h3 {
+        margin: 0 0 4%;
+        color: var(--navy);
+        font-size: clamp(15px, 1.2vw, 19px);
+        line-height: 1.2;
+      }
+      .md-spec-item p {
+        margin: 0;
+        color: #667085;
+        font-size: clamp(10px, 0.82vw, 13px);
+        line-height: 1.5;
+      }
+      .capture-section {
+        height: 23%;
+        margin-top: 2.4%;
+      }
+      .management-flow {
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.2%;
+        height: 18%;
+        margin-top: 3.2%;
+      }
+      .management-step {
+        display: grid;
+        position: relative;
+        min-width: 0;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        gap: 5%;
+        padding: 2.5% 3%;
+        border: 1px solid var(--line);
+        color: #183f67;
+        background: #f8fbfe;
+        text-align: center;
+      }
+      .management-step-icon {
+        display: grid;
+        width: clamp(24px, 2.1vw, 34px);
+        height: clamp(24px, 2.1vw, 34px);
+        place-items: center;
+        border-radius: 50%;
+        color: #fff;
+        background: var(--navy);
+      }
+      .management-step-icon svg {
+        width: 62%;
+        height: 62%;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.8;
+      }
+      .management-step-icon img {
+        width: 62%;
+        height: 62%;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+      }
+      .management-step strong {
+        color: #183f67;
+        font-size: clamp(11px, 0.9vw, 14px);
+        line-height: 1.2;
+      }
+      .management-step small {
+        color: #667085;
+        font-size: clamp(9px, 0.72vw, 12px);
+        line-height: 1.35;
+      }
+      .management-step:not(:last-child)::after {
+        position: absolute;
+        top: 50%;
+        right: -14%;
+        transform: translateY(-50%);
+        color: var(--blue);
+        content: "→";
+        font-size: 1.25em;
+        font-weight: 700;
+      }
+      .management-loop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1%;
+        height: 5%;
+        margin-top: 1.1%;
+        border-left: 4px solid var(--blue);
+        color: #183f67;
+        background: #e8f2fb;
+        font-size: clamp(9px, 0.76vw, 12px);
+        font-weight: 700;
+      }
+      .management-loop span {
+        color: var(--blue);
+        font-size: 1.5em;
+      }
+      .capture-section.capture-page {
+        height: 43%;
+        margin-top: 2.4%;
+      }
+      .capture-section.capture-page .capture-grid {
+        height: 88%;
+      }
+      .capture-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 1.4%;
+        color: #667085;
+        font-size: clamp(10px, 0.8vw, 13px);
+      }
+      .capture-heading strong {
+        color: var(--navy);
+        font-size: clamp(13px, 1.05vw, 17px);
+      }
+      .capture-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.8%;
+        height: 82%;
+      }
+      .project-capture-slot {
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 4%;
+        min-width: 0;
+        overflow: hidden;
+        padding: 2.5%;
+        border: 1px dashed #91a9c0;
+        outline: none;
+        color: #7a8da3;
+        background: #f8fbfe;
+        text-align: center;
+      }
+      .project-capture-slot:focus {
+        border-color: var(--blue);
+        background: #fff;
+      }
+      .project-capture-slot img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .capture-slot-label {
+        color: var(--blue);
+        font-size: clamp(9px, 0.72vw, 12px);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+      .project-capture-slot strong {
+        color: #475467;
+        font-size: clamp(11px, 0.9vw, 14px);
+      }
+      .project-capture-slot small {
+        font-size: clamp(9px, 0.72vw, 12px);
       }
       .flutter-decision-layout {
         display: grid;
@@ -1128,68 +1379,108 @@
         </section>
 
         <section class="slide" aria-label="4장">
-          <div class="eyebrow">SYSTEM ARCHITECTURE / TECH STACK</div>
-          <h1>시스템 기술 스택</h1>
+          <div class="eyebrow">DELIVERY METHOD / VIBE CODING</div>
+          <h1>Claude Code 도입: 문서에서 구현까지</h1>
           <div class="title-rule"></div>
-          <div class="tech-stack-layout">
-            <div class="tech-explanation">
-              <div class="tech-kicker">WHY FLUTTER?</div>
-              <h2>하나의 언어로<br />PC와 Mobile을 함께</h2>
-              <p>
-                모바일과 PC에서 동시에 제공되는 메신저를 하나의 Dart 코드베이스로 관리해 플랫폼별 개발 중복을 줄이고, 일관된 사용자 경험을 유지합니다.
-              </p>
-              <ul>
-                <li>단일 코드베이스로 Android·iOS·PC 대응</li>
-                <li>위젯 재사용으로 UI 개발과 유지보수 효율화</li>
-                <li>Hot Reload로 빠른 개발·검증 사이클</li>
-              </ul>
+          <p class="subtitle">Vibe Coding과 MD 기반 프로젝트 설계로 요구사항·기술 스펙·구현 작업을 하나의 흐름으로 연결했습니다.</p>
+          <div class="delivery-layout">
+            <div class="delivery-overview">
+              <div class="delivery-kicker">CLAUDE CODE + VIBE CODING</div>
+              <h2>대화로 설계하고,<br />문서로 남기고,<br />Issue로 실행</h2>
+              <p>Claude Code를 활용해 기획과 개발 사이의 맥락을 유지하면서 설계·구현·검증을 반복했습니다.</p>
+              <div class="delivery-flow"><span>요구사항</span><i>→</i><span>MD 문서</span><i>→</i><span>구현</span></div>
             </div>
-            <div class="tech-flow">
-              <div class="tech-flow-heading">
-                <strong>PC · Mobile Messenger</strong><span>CORE STACK</span>
-              </div>
-              <div class="stack-cards">
-                <article class="stack-card" data-stack="flutter">
-                  <div class="stack-icon">
-                    <img src="assets/flutter-logo.svg" alt="Flutter 공식 로고" />
-                  </div>
-                  <div><h3>Flutter</h3><p><strong>FE · Dart</strong>공통 UI와 멀티플랫폼 앱</p></div>
-                </article>
-                <article class="stack-card" data-stack="nestjs">
-                  <div class="stack-icon">
-                    <img src="assets/nestjs-logo.svg" alt="NestJS 공식 로고" />
-                  </div>
-                  <div><h3>NestJS</h3><p><strong>BE · TypeScript</strong>API와 WebSocket 서버</p></div>
-                </article>
-                <article class="stack-card" data-stack="redis">
-                  <div class="stack-icon">
-                    <img src="assets/redis-logo.svg" alt="Redis 공식 로고" />
-                  </div>
-                  <div><h3>Redis</h3><p><strong>WebSocket Pub/Sub</strong>실시간 메시지 전달과 채널 브로드캐스트</p></div>
-                </article>
-                <article class="stack-card" data-stack="postgresql">
-                  <div class="stack-icon">
-                    <img src="assets/postgresql-logo.svg" alt="PostgreSQL 공식 로고" />
-                  </div>
-                  <div><h3>PostgreSQL</h3><p><strong>Message Store</strong>메시지 영속화와 데이터 정합성</p></div>
-                </article>
-              </div>
+            <div class="md-spec-grid" aria-label="MD 기반 프로젝트 산출물">
+              <article class="md-spec-item">
+                <div class="md-index">01 / PRODUCT</div>
+                <h3>PRD</h3>
+                <p>제품 목표·범위·핵심 요구사항을 문서화</p>
+              </article>
+              <article class="md-spec-item">
+                <div class="md-index">02 / FRONTEND</div>
+                <h3>Frontend Spec</h3>
+                <p>화면·상태·컴포넌트 규칙과 UI 동작 정의</p>
+              </article>
+              <article class="md-spec-item">
+                <div class="md-index">03 / BACKEND</div>
+                <h3>Backend Spec</h3>
+                <p>API·이벤트·데이터 모델과 연계 방식 설계</p>
+              </article>
+              <article class="md-spec-item">
+                <div class="md-index">04 / USER FLOW</div>
+                <h3>User Scenario</h3>
+                <p>사용자 흐름과 예외 케이스를 기준으로 검증</p>
+              </article>
             </div>
           </div>
           <div class="footer"><span>추진 계획 보고서</span><span>04</span></div>
         </section>
 
         <section class="slide" aria-label="5장">
+          <div class="eyebrow">PROJECT MANAGEMENT / GIT WORKFLOW</div>
+          <h1>Git Issue 기반 프로젝트 실행 관리</h1>
+          <div class="title-rule"></div>
+          <p class="subtitle">MD로 정리한 설계 내용을 Issue와 Pull Request 단위로 나누어 구현·리뷰·이력까지 관리했습니다.</p>
+          <div class="management-flow" aria-label="MD 설계부터 완료까지의 Git 작업 흐름">
+            <div class="management-step">
+              <span class="management-step-icon" aria-hidden="true">
+                <img src="assets/md-file-code.svg" alt="" />
+              </span>
+              <strong>MD 설계</strong>
+              <small>요구사항·스펙 문서화</small>
+            </div>
+            <div class="management-step">
+              <span class="management-step-icon" aria-hidden="true">
+                <img src="assets/github-issue.svg" alt="" />
+              </span>
+              <strong>Git Issue</strong>
+              <small>작업 단위·우선순위 관리</small>
+            </div>
+            <div class="management-step">
+              <span class="management-step-icon" aria-hidden="true">
+                <img src="assets/github-pull-request.svg" alt="" />
+              </span>
+              <strong>PR · 리뷰</strong>
+              <small>구현·검증·협업</small>
+            </div>
+            <div class="management-step">
+              <span class="management-step-icon" aria-hidden="true">
+                <img src="assets/github-history.svg" alt="" />
+              </span>
+              <strong>완료 · 이력화</strong>
+              <small>결과 기록·재사용</small>
+            </div>
+          </div>
+          <div class="management-loop"><span aria-hidden="true">↺</span>완료된 이력과 피드백이 다음 MD 설계로 다시 연결됩니다.</div>
+          <div class="capture-section capture-page">
+            <div class="capture-heading"><strong>실제 관리 화면 캡처 영역</strong><span>Git Issue · Milestone · PR</span></div>
+            <div class="capture-grid">
+              <div class="project-capture-slot" contenteditable="true" role="textbox" aria-label="Git Issue와 Milestone 캡처를 붙여넣는 영역">
+                <span class="capture-slot-label">GIT ISSUE / MILESTONE</span>
+                <strong>캡처 이미지를 붙여넣으세요</strong>
+                <small>Issue 단위의 작업 분해와 진행 관리 화면</small>
+              </div>
+              <div class="project-capture-slot" contenteditable="true" role="textbox" aria-label="Pull Request와 작업 이력 캡처를 붙여넣는 영역">
+                <span class="capture-slot-label">PULL REQUEST / HISTORY</span>
+                <strong>캡처 이미지를 붙여넣으세요</strong>
+                <small>구현 결과와 리뷰·이력 관리 화면</small>
+              </div>
+            </div>
+          </div>
+          <div class="footer"><span>추진 계획 보고서</span><span>05</span></div>
+        </section>
+
+        <section class="slide" aria-label="6장">
           <div class="eyebrow">SYSTEM ARCHITECTURE</div>
           <h1 contenteditable="true">시스템 아키텍쳐</h1>
           <div class="title-rule"></div>
           <div class="architecture-visual">
             <img src="assets/slide5.png" alt="PC와 Mobile 메신저 시스템 아키텍쳐 더미 이미지" />
           </div>
-          <div class="footer"><span>추진 계획 보고서</span><span>05</span></div>
+          <div class="footer"><span>추진 계획 보고서</span><span>06</span></div>
         </section>
 
-        <section class="slide" aria-label="6장">
+        <section class="slide" aria-label="7장">
           <div class="eyebrow">FRONTEND DECISION</div>
           <h1>왜 FE로 Flutter를 선택했는가?</h1>
           <div class="title-rule"></div>
@@ -1226,63 +1517,18 @@
               </article>
             </div>
           </div>
-          <div class="footer"><span>추진 계획 보고서</span><span>06</span></div>
+          <div class="footer"><span>추진 계획 보고서</span><span>07</span></div>
         </section>
 
-        <section class="slide" aria-label="7장">
+        <section class="slide" aria-label="8장">
           <div class="eyebrow">BUSINESS ENABLEMENT</div>
           <h1>MES Data와 Messenger Platform의 연결</h1>
           <div class="title-rule"></div>
           <p class="subtitle">생산 현장의 데이터를 대화와 업무 액션으로 연결해, 필요한 사람이 필요한 순간에 대응할 수 있도록 합니다.</p>
-          <div class="data-binding-layout">
-            <div class="data-binding-flow">
-              <div class="binding-flow" aria-label="MES Data와 Messenger Platform의 데이터 바인딩 흐름">
-                <article class="binding-node mes-node">
-                  <div class="binding-kicker">DATA SOURCE</div>
-                  <h2>MES Data</h2>
-                  <ul>
-                    <li>생산 실적 · 작업지시</li>
-                    <li>품질 · 설비 상태</li>
-                    <li>현장 업무 이벤트</li>
-                  </ul>
-                </article>
-                <div class="binding-bridge">DATA<br />BINDING</div>
-                <article class="binding-node messenger-node">
-                  <div class="binding-kicker">WORKSPACE</div>
-                  <h2>Messenger Platform</h2>
-                  <ul>
-                    <li>채널 · 알림 · 담당자</li>
-                    <li>실시간 공유 · 대화</li>
-                    <li>업무 이력 축적</li>
-                  </ul>
-                </article>
-              </div>
-              <div class="binding-caption"><strong>데이터가 발생한 곳에서 바로 공유하고 대응합니다.</strong></div>
-            </div>
-            <div class="work-impact">
-              <div class="impact-kicker">HOW IT HELPS</div>
-              <h2>업무에 생기는 변화</h2>
-              <div class="impact-grid">
-                <article class="impact-item">
-                  <h3>실시간 공유</h3>
-                  <p>중요한 현장 데이터를 관련 채널에 즉시 전달</p>
-                </article>
-                <article class="impact-item">
-                  <h3>대응 속도 향상</h3>
-                  <p>담당자 확인부터 조치까지의 시간을 단축</p>
-                </article>
-                <article class="impact-item">
-                  <h3>업무 맥락 유지</h3>
-                  <p>데이터와 대화를 한 흐름 안에서 함께 확인</p>
-                </article>
-                <article class="impact-item">
-                  <h3>이력 기반 관리</h3>
-                  <p>메시지와 처리 과정을 남겨 후속 관리에 활용</p>
-                </article>
-              </div>
-            </div>
+          <div class="synergy-visual">
+            <img src="assets/slide8.png" alt="PC와 Mobile Messenger Platform이 MES Data와 바인딩되어 업무 시너지를 만드는 다이어그램" />
           </div>
-          <div class="footer"><span>추진 계획 보고서</span><span>07</span></div>
+          <div class="footer"><span>추진 계획 보고서</span><span>08</span></div>
         </section>
       </div>
     </main>
@@ -1297,11 +1543,11 @@
     </div>
     <button class="fullscreen" id="fullscreen" type="button">전체 화면</button>
     <div class="help">← → 방향키로 이동</div>
-    <div class="counter" id="counter" aria-live="polite">1 / 7</div>
+    <div class="counter" id="counter" aria-live="polite">1 / 8</div>
 
     <script>
       const slides = [...document.querySelectorAll(".slide")];
-      const slideOrder = [0, 1, 2, 3, 4, 5, 6];
+      const slideOrder = [0, 1, 2, 3, 4, 5, 6, 7];
       const counter = document.getElementById("counter");
       const prev = document.getElementById("prev");
       const next = document.getElementById("next");
