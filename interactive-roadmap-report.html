@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>추진 계획 보고서</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #667085;
+        --line: #d8dee9;
+        --soft: #f5f7fa;
+        --navy: #173b66;
+        --blue: #2468a9;
+        --shadow: 0 22px 60px rgba(15, 35, 60, 0.16);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        overflow: hidden;
+        color: var(--ink);
+        background: #e9edf2;
+        font-family: Arial, "Noto Sans KR", "Malgun Gothic", sans-serif;
+      }
+      button {
+        font: inherit;
+      }
+      .stage {
+        display: grid;
+        height: 100%;
+        padding: 28px 88px;
+        place-items: center;
+      }
+      .deck {
+        position: relative;
+        width: min(calc(100vw - 176px), calc((100vh - 56px) * 16 / 9));
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: 5.1% 6.2% 4.6%;
+        opacity: 0;
+        transform: translateX(28px);
+        pointer-events: none;
+        background: #fff;
+        transition:
+          opacity 0.32s ease,
+          transform 0.38s ease;
+      }
+      .slide.active {
+        z-index: 2;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .eyebrow {
+        margin-bottom: 0.8%;
+        color: var(--blue);
+        font-size: clamp(11px, 1vw, 16px);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .slide h1 {
+        margin: 0;
+        color: #152239;
+        font-size: clamp(25px, 2.8vw, 46px);
+        line-height: 1.15;
+        letter-spacing: -0.045em;
+      }
+      .title-rule {
+        width: 100%;
+        height: 2px;
+        margin-top: 1.35%;
+        background: linear-gradient(90deg, var(--navy) 0 9%, var(--line) 9%);
+      }
+      .subtitle {
+        margin: 1% 0 0;
+        color: var(--muted);
+        font-size: clamp(12px, 1.08vw, 17px);
+      }
+      .compare {
+        height: 65%;
+        margin-top: 3.1%;
+      }
+      .compare-table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: clamp(11px, 1vw, 16px);
+      }
+      .compare-table th,
+      .compare-table td {
+        padding: 1.4% 2%;
+        border: 1px solid var(--line);
+      }
+      .compare-table thead th {
+        color: #fff;
+        background: var(--navy);
+        font-size: clamp(15px, 1.35vw, 22px);
+        text-align: center;
+      }
+      .compare-table thead th:first-child {
+        width: 17%;
+        background: #344054;
+      }
+      .compare-table thead th:last-child { background: #356f9e; }
+      .compare-table thead small {
+        font-size: 0.65em;
+        font-weight: 400;
+      }
+      .compare-table tbody th {
+        color: #344054;
+        background: var(--soft);
+        font-weight: 700;
+        text-align: center;
+      }
+      .compare-table tbody td {
+        color: #475467;
+        line-height: 1.45;
+        vertical-align: middle;
+      }
+      .compare-table tbody tr:nth-child(even) td { background: #fbfcfe; }
+      .reference-table {
+        width: 100%;
+        margin-top: 0;
+        border-collapse: collapse;
+        table-layout: fixed;
+        color: var(--ink);
+        background: #fff;
+        font-size: clamp(11px, 1vw, 16px);
+      }
+      .reference-table th,
+      .reference-table td {
+        padding: 1.4% 2%;
+        border: 1px solid var(--line);
+        text-align: center;
+      }
+      .reference-table thead th {
+        color: #fff;
+        background: var(--navy);
+        font-size: clamp(15px, 1.35vw, 22px);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .reference-table thead tr:first-child th:first-child,
+      .reference-table thead tr:nth-child(2) th:first-child {
+        width: 19%;
+        background: #344054;
+      }
+      .reference-table thead tr:first-child th:last-child,
+      .reference-table thead tr:nth-child(2) th:last-child {
+        background: #356f9e;
+      }
+      .reference-table thead small {
+        font-size: 0.65em;
+        font-weight: 400;
+      }
+      .reference-table tbody th,
+      .reference-table tbody td {
+        height: 14%;
+      }
+      .reference-table tbody th {
+        width: 19%;
+        color: #344054;
+        background: var(--soft);
+        font-weight: 700;
+        text-align: left;
+      }
+      .reference-table tbody td {
+        color: #475467;
+        line-height: 1.45;
+        vertical-align: middle;
+      }
+      .reference-table tbody tr:nth-child(even) td { background: #fbfcfe; }
+      .reference-table .selected-column,
+      .reference-table .non-selected {
+        transition: color 0.45s ease, background-color 0.45s ease, border-color 0.45s ease, transform 0.8s ease;
+      }
+      .reference-table.is-selected .non-selected {
+        color: #98a2b3;
+        background: #eef1f4;
+        text-decoration: line-through;
+        text-decoration-color: #98a2b3;
+        text-decoration-thickness: 1.5px;
+      }
+      .reference-table.is-selected .group-header {
+        color: #98a2b3;
+        background-color: #eef1f4 !important;
+        border-color: #cbd3de;
+      }
+      .reference-table.is-selected thead tr:nth-child(2) .non-selected {
+        color: #98a2b3;
+        background-color: #eef1f4 !important;
+        border-color: #cbd3de;
+      }
+      .reference-table.is-selected .selected-column {
+        color: #183f67;
+        background: #e8f2fb;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        box-shadow: inset 3px 0 0 var(--blue), inset -3px 0 0 var(--blue);
+        font-weight: 700;
+      }
+      .reference-table.is-selected thead tr:nth-child(2) .selected-column {
+        border-top-color: transparent;
+        box-shadow: inset 3px 3px 0 var(--blue), inset -3px 0 0 var(--blue);
+      }
+      .reference-table.is-selected tbody tr:last-child .selected-column {
+        border-bottom-color: transparent;
+        box-shadow: inset 3px 0 0 var(--blue), inset -3px 0 0 var(--blue), inset 0 -3px 0 var(--blue);
+      }
+      .reference-layout {
+        position: relative;
+        height: 67%;
+        margin-top: 3.2%;
+      }
+      .reference-table-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+      .reference-table {
+        transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+      }
+      .moving-column {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .moving-cell {
+        position: absolute;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        text-align: center;
+        transition: transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .improved-panel {
+        position: absolute;
+        top: 0;
+        left: 28%;
+        right: 0;
+        z-index: 2;
+        height: 100%;
+        overflow: hidden;
+        padding: 6%;
+        border: 1px solid #b8cde0;
+        border-radius: 4px;
+        color: #475467;
+        background: linear-gradient(145deg, #f6fbff, #e8f2fb);
+        opacity: 0;
+        transform: translateX(32px);
+        transition: opacity 0.65s ease 0.25s, transform 0.85s ease 0.25s;
+      }
+      .improvement-arrow {
+        position: absolute;
+        top: 50%;
+        left: 19%;
+        z-index: 4;
+        display: flex;
+        width: 9%;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--blue);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-50%) translateX(-12px);
+        transition: opacity 0.55s ease 0.35s, transform 0.65s ease 0.35s;
+      }
+      .improvement-arrow-label {
+        color: #5b7fa2;
+        font-size: clamp(8px, 0.62vw, 10px);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+      .improvement-arrow-symbol {
+        font-size: clamp(24px, 2.5vw, 38px);
+        font-weight: 300;
+        line-height: 1;
+      }
+      .improved-kicker {
+        margin-bottom: 8%;
+        color: var(--blue);
+        font-size: clamp(10px, 0.85vw, 14px);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .improved-panel h2 {
+        margin: 0 0 7%;
+        color: #183f67;
+        font-size: clamp(17px, 1.65vw, 26px);
+        line-height: 1.2;
+      }
+      .improved-panel p {
+        margin: 0 0 8%;
+        font-size: clamp(11px, 0.95vw, 15px);
+        line-height: 1.6;
+      }
+      .improved-panel ul {
+        margin: 0;
+        padding-left: 1.2em;
+        font-size: clamp(10px, 0.9vw, 14px);
+        line-height: 1.8;
+      }
+      .reference-layout.is-improved .reference-table {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+      }
+      .reference-layout.is-improved .moving-column {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+      }
+      .reference-layout.is-improved .moving-cell {
+        transform: translateX(var(--move-x));
+      }
+      .reference-layout.is-improved .improved-panel {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .reference-layout.is-improved .improvement-arrow {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+      .roadmap {
+        position: relative;
+        height: 24%;
+        margin-top: 3%;
+        padding: 0 1%;
+      }
+      .road-line {
+        position: absolute;
+        top: 70%;
+        right: 0;
+        left: 0;
+        height: 3px;
+        background: var(--line);
+      }
+      .milestones {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        height: 100%;
+        /* 2026.06–2026.10 / 2026.10–2027.12 / 2027.12–2028.03 */
+        grid-template-columns: 19% 67% 14%;
+      }
+      .mile {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 6px;
+        border: 0;
+        color: #667085;
+        background: transparent;
+        cursor: pointer;
+      }
+      .mile::before {
+        position: absolute;
+        top: 15%;
+        bottom: 30%;
+        left: 100%;
+        width: 1px;
+        background: var(--line);
+        content: "";
+      }
+      .dot {
+        position: absolute;
+        top: 63%;
+        left: 100%;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 2px #aeb9c7;
+        transform: translateX(-50%);
+        transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      }
+      .mile strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #344054;
+        font-size: clamp(11px, 1vw, 16px);
+      }
+      .mile small {
+        font-size: clamp(9px, 0.82vw, 13px);
+      }
+      .mile:hover .dot,
+      .mile:focus-visible .dot,
+      .mile.active .dot {
+        background: var(--blue);
+        box-shadow: 0 0 0 3px var(--blue);
+        transform: translateX(-50%) scale(1.12);
+      }
+      .mile:hover strong,
+      .mile:focus-visible strong,
+      .mile.active strong {
+        color: var(--blue);
+      }
+      .road-table {
+        width: 100%;
+        margin-top: 2.5%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: clamp(10px, 0.92vw, 15px);
+      }
+      .road-table th,
+      .road-table td {
+        padding: 1.05% 1.3%;
+        border: 1px solid var(--line);
+      }
+      .road-table th {
+        padding-top: 1.1%;
+        padding-bottom: 1.1%;
+        color: #344054;
+        background: var(--soft);
+        text-align: center;
+      }
+      .road-table td {
+        color: #475467;
+        transition: 0.22s;
+      }
+      .road-table th:nth-child(1) {
+        width: 10%;
+      }
+      .road-table th:nth-child(2) {
+        width: 20%;
+      }
+      .road-table th:nth-child(4) {
+        width: 13%;
+      }
+      .road-table tr.hit td {
+        color: #183f67;
+        background: #e8f2fb;
+        font-weight: 700;
+      }
+      .road-table tr.hit td:first-child {
+        box-shadow: inset 5px 0 var(--blue);
+      }
+      .blank-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 2.4%;
+        height: 67%;
+        margin-top: 3.2%;
+      }
+      .placeholder {
+        padding: 5%;
+        border: 1px solid var(--line);
+        outline: none;
+        color: #98a2b3;
+        background: #fafbfc;
+      }
+      .placeholder:focus {
+        border-color: #78a6cf;
+        background: #fff;
+      }
+      .placeholder h2 {
+        margin: 0 0 4%;
+        color: #475467;
+        font-size: clamp(17px, 1.7vw, 27px);
+      }
+      .placeholder p {
+        margin: 0;
+        font-size: clamp(11px, 1vw, 16px);
+        line-height: 1.7;
+      }
+      .blank-visual {
+        display: grid;
+        place-items: center;
+        border: 1px dashed #bcc7d4;
+        color: #98a2b3;
+        font-size: clamp(12px, 1vw, 16px);
+      }
+      .architecture-visual {
+        height: 78%;
+        margin-top: 2.4%;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .architecture-visual img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .tech-stack-layout {
+        display: grid;
+        grid-template-columns: 0.84fr 1.16fr;
+        gap: 2.4%;
+        height: 67%;
+        margin-top: 3.2%;
+      }
+      .tech-explanation {
+        padding: 6%;
+        border-left: 4px solid var(--blue);
+        color: #475467;
+        background: var(--soft);
+      }
+      .tech-kicker {
+        margin-bottom: 7%;
+        color: var(--blue);
+        font-size: clamp(10px, 0.82vw, 13px);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .tech-explanation h2 {
+        margin: 0 0 7%;
+        color: #183f67;
+        font-size: clamp(18px, 1.65vw, 26px);
+        line-height: 1.25;
+      }
+      .tech-explanation p {
+        margin: 0 0 8%;
+        font-size: clamp(11px, 0.95vw, 15px);
+        line-height: 1.65;
+      }
+      .tech-explanation ul {
+        margin: 0;
+        padding-left: 1.2em;
+        font-size: clamp(10px, 0.88vw, 14px);
+        line-height: 1.9;
+      }
+      .tech-flow {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .tech-flow-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 3%;
+        color: var(--muted);
+        font-size: clamp(10px, 0.82vw, 13px);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .tech-flow-heading strong {
+        color: var(--navy);
+        font-size: clamp(14px, 1.15vw, 18px);
+        letter-spacing: -0.02em;
+        text-transform: none;
+      }
+      .stack-cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4%;
+        min-height: 0;
+        flex: 1;
+      }
+      .stack-card {
+        display: grid;
+        grid-template-columns: 22% 1fr;
+        align-content: center;
+        gap: 5%;
+        min-width: 0;
+        padding: 7%;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .stack-icon {
+        display: grid;
+        width: 100%;
+        aspect-ratio: 1;
+        place-items: center;
+        border-radius: 10px;
+        color: var(--blue);
+        background: #e8f2fb;
+      }
+      .stack-icon img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+      .stack-card[data-stack="nestjs"] .stack-icon,
+      .stack-card[data-stack="redis"] .stack-icon {
+        color: #c94b55;
+        background: #fbecee;
+      }
+      .stack-card[data-stack="postgresql"] .stack-icon {
+        color: #336791;
+        background: #edf4fa;
+      }
+      .stack-card h3 {
+        margin: 0 0 5%;
+        color: var(--navy);
+        font-size: clamp(15px, 1.25vw, 20px);
+        line-height: 1.2;
+      }
+      .stack-card p {
+        margin: 0;
+        color: #667085;
+        font-size: clamp(10px, 0.82vw, 13px);
+        line-height: 1.55;
+      }
+      .stack-card p strong {
+        display: block;
+        margin-bottom: 2%;
+        color: #475467;
+        font-size: 0.95em;
+      }
+      .footer {
+        display: flex;
+        position: absolute;
+        right: 6.2%;
+        bottom: 2.5%;
+        left: 6.2%;
+        justify-content: space-between;
+        color: #98a2b3;
+        font-size: clamp(9px, 0.78vw, 12px);
+      }
+      .nav {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+      .nav button {
+        display: grid;
+        position: absolute;
+        top: 50%;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border: 1px solid #cbd3de;
+        border-radius: 50%;
+        color: #344054;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 8px 24px rgba(20, 35, 55, 0.12);
+        cursor: pointer;
+        font-size: 22px;
+        pointer-events: auto;
+      }
+      .nav .prev {
+        left: 22px;
+      }
+      .nav .next {
+        right: 22px;
+      }
+      .nav button:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+      .counter,
+      .help,
+      .fullscreen {
+        position: fixed;
+        color: #475467;
+        font-size: 13px;
+      }
+      .counter {
+        right: 30px;
+        bottom: 22px;
+        padding: 7px 13px;
+        border: 1px solid #d5dce5;
+        border-radius: 20px;
+        background: #fff;
+      }
+      .help {
+        bottom: 22px;
+        left: 30px;
+        color: #667085;
+        font-size: 12px;
+      }
+      .fullscreen {
+        top: 22px;
+        right: 30px;
+        padding: 8px 12px;
+        border: 1px solid #cbd3de;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+      }
+      @media (max-width: 700px) {
+        .stage {
+          padding: 10px;
+        }
+        .deck {
+          width: calc(100vw - 20px);
+        }
+        .nav,
+        .help,
+        .fullscreen {
+          display: none;
+        }
+        .counter {
+          right: 16px;
+          bottom: 10px;
+        }
+        .slide {
+          padding: 4.5% 5%;
+        }
+        .footer {
+          right: 5%;
+          left: 5%;
+        }
+      }
+      @media print {
+        body {
+          overflow: visible;
+          background: #fff;
+        }
+        .stage {
+          display: block;
+          padding: 0;
+        }
+        .deck {
+          width: auto;
+          aspect-ratio: auto;
+          overflow: visible;
+          box-shadow: none;
+        }
+        .slide {
+          position: relative;
+          width: 297mm;
+          height: 167.06mm;
+          page-break-after: always;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+        }
+        .nav,
+        .counter,
+        .help,
+        .fullscreen {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="deck" id="deck">
+        <section class="slide active" aria-label="1장">
+          <div class="eyebrow">BACKGROUND &amp; CURRENT STATUS</div>
+          <h1>추진 배경 / 현황</h1>
+          <div class="title-rule"></div>
+          <div class="compare">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th scope="col">구분</th>
+                  <th scope="col">A시스템<br /><small>현행 방식</small></th>
+                  <th scope="col">B시스템<br /><small>개선 방식</small></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">운영 방식</th>
+                  <td>현재 운영 프로세스 및 담당 체계 중심</td>
+                  <td>개선 프로세스와 역할 체계를 표준화</td>
+                </tr>
+                <tr>
+                  <th scope="row">주요 특징</th>
+                  <td>기존 환경을 중심으로 운영하며 적용 범위가 제한적</td>
+                  <td>표준화·자동화를 통해 운영 범위와 효율을 확대</td>
+                </tr>
+                <tr>
+                  <th scope="row">업무 처리</th>
+                  <td>반복 업무와 수작업 확인 절차가 상대적으로 많음</td>
+                  <td>업무 흐름을 단순화하고 처리 과정을 체계화</td>
+                </tr>
+                <tr>
+                  <th scope="row">관리 및 성과</th>
+                  <td>관리 정보가 분산되어 현황 파악과 성과 측정에 한계</td>
+                  <td>가시성·정확성을 높이고 안정적인 운영 정착을 지원</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          <div class="footer"><span>추진 계획 보고서</span><span>01</span></div>
+        </section>
+
+        <section class="slide" aria-label="2장">
+          <div class="eyebrow">REFERENCE</div>
+          <h1>과거 자료</h1>
+          <div class="title-rule"></div>
+          <p class="subtitle">A팀과 B팀의 안별 비교 결과 · 3안 강조 후 클릭하면 개선안이 나타납니다.</p>
+          <div class="reference-layout" id="referenceLayout">
+            <div class="reference-table-wrap">
+              <table class="reference-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col" colspan="3" class="group-header">A팀</th>
+                <th scope="col" class="group-header">B팀</th>
+              </tr>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col" class="non-selected">1안</th>
+                <th scope="col" class="non-selected">2안</th>
+                <th scope="col" class="selected-column">3안</th>
+                <th scope="col" class="non-selected">4안</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">비교1</th><td class="non-selected">123123</td><td class="non-selected">123</td><td class="selected-column">123</td><td class="non-selected">123</td></tr>
+              <tr><th scope="row">비교2</th><td class="non-selected">123123</td><td class="non-selected">123123</td><td class="selected-column">123123</td><td class="non-selected">123123</td></tr>
+              <tr><th scope="row">비교3</th><td class="non-selected">123123</td><td class="non-selected">1231</td><td class="selected-column">123123</td><td class="non-selected">1231</td></tr>
+              <tr><th scope="row">비교4</th><td class="non-selected"></td><td class="non-selected">123</td><td class="selected-column">123123</td><td class="non-selected">123</td></tr>
+            </tbody>
+              </table>
+            </div>
+            <div class="improved-panel" aria-hidden="true">
+              <div class="improved-kicker">VIBE CODING / NEXT STEP</div>
+              <h2>클로드 코드 기반 고도화</h2>
+              <p>3안 선택 이후, 클로드 코드를 활용한 바이브 코딩으로 기존 안보다 더 나은 개발 방향을 구현했습니다.</p>
+              <ul>
+                <li>대화형 요구사항 반영으로 빠른 프로토타이핑</li>
+                <li>3안의 핵심 기능을 확장한 개선 개발</li>
+                <li>사용성과 운영 효율을 함께 고도화</li>
+              </ul>
+            </div>
+            <div class="improvement-arrow" aria-hidden="true">
+              <span class="improvement-arrow-label">3안 이후</span>
+              <span class="improvement-arrow-symbol">→</span>
+              <span class="improvement-arrow-label">고도화</span>
+            </div>
+          </div>
+          <div class="footer"><span>추진 계획 보고서</span><span>02</span></div>
+        </section>
+
+        <section class="slide" aria-label="3장">
+          <div class="eyebrow">IMPLEMENTATION PLAN</div>
+          <h1>추진 일정 / Roadmap</h1>
+          <div class="title-rule"></div>
+          <div class="roadmap">
+            <div class="road-line" aria-hidden="true"></div>
+            <div class="milestones" id="milestones">
+              <button class="mile active" type="button" data-phase="1">
+                <span class="dot"></span><strong>Ph1</strong
+                ><small>26.06–26.10</small>
+              </button>
+              <button class="mile" type="button" data-phase="2">
+                <span class="dot"></span><strong>Ph2</strong
+                ><small>~27.12</small>
+              </button>
+              <button class="mile" type="button" data-phase="3">
+                <span class="dot"></span><strong>Ph3</strong
+                ><small>~28.03</small>
+              </button>
+            </div>
+          </div>
+          <table class="road-table">
+            <thead>
+              <tr>
+                <th>단계</th>
+                <th>추진 구간</th>
+                <th>주요 수행 내용</th>
+                <th>일정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-phase="1" class="hit">
+                <td>Ph1</td>
+                <td>착수 및 기반 정리</td>
+                <td>목표·범위 정의, 이해관계자 협의</td>
+                <td>26.06–26.10</td>
+              </tr>
+              <tr data-phase="2">
+                <td>Ph2</td>
+                <td>설계 및 개발</td>
+                <td>핵심 기능 구현, 검증 및 보완</td>
+                <td>~27.12</td>
+              </tr>
+              <tr data-phase="3">
+                <td>Ph3</td>
+                <td>운영 고도화</td>
+                <td>운영 전환, 성과 평가 및 지속 개선</td>
+                <td>~28.03</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer">
+            <span>마일스톤에 마우스를 올리면 관련 일정이 강조됩니다.</span
+            ><span>03</span>
+          </div>
+        </section>
+
+        <section class="slide" aria-label="4장">
+          <div class="eyebrow">SYSTEM ARCHITECTURE / TECH STACK</div>
+          <h1>시스템 기술 스택</h1>
+          <div class="title-rule"></div>
+          <div class="tech-stack-layout">
+            <div class="tech-explanation">
+              <div class="tech-kicker">WHY FLUTTER?</div>
+              <h2>하나의 언어로<br />PC와 Mobile을 함께</h2>
+              <p>
+                모바일과 PC에서 동시에 제공되는 메신저를 하나의 Dart 코드베이스로 관리해 플랫폼별 개발 중복을 줄이고, 일관된 사용자 경험을 유지합니다.
+              </p>
+              <ul>
+                <li>단일 코드베이스로 Android·iOS·PC 대응</li>
+                <li>위젯 재사용으로 UI 개발과 유지보수 효율화</li>
+                <li>Hot Reload로 빠른 개발·검증 사이클</li>
+              </ul>
+            </div>
+            <div class="tech-flow">
+              <div class="tech-flow-heading">
+                <strong>PC · Mobile Messenger</strong><span>CORE STACK</span>
+              </div>
+              <div class="stack-cards">
+                <article class="stack-card" data-stack="flutter">
+                  <div class="stack-icon">
+                    <img src="assets/flutter-logo.svg" alt="Flutter 공식 로고" />
+                  </div>
+                  <div><h3>Flutter</h3><p><strong>FE · Dart</strong>공통 UI와 멀티플랫폼 앱</p></div>
+                </article>
+                <article class="stack-card" data-stack="nestjs">
+                  <div class="stack-icon">
+                    <img src="assets/nestjs-logo.svg" alt="NestJS 공식 로고" />
+                  </div>
+                  <div><h3>NestJS</h3><p><strong>BE · TypeScript</strong>API와 WebSocket 서버</p></div>
+                </article>
+                <article class="stack-card" data-stack="redis">
+                  <div class="stack-icon">
+                    <img src="assets/redis-logo.svg" alt="Redis 공식 로고" />
+                  </div>
+                  <div><h3>Redis</h3><p><strong>WebSocket Pub/Sub</strong>실시간 메시지 전달과 채널 브로드캐스트</p></div>
+                </article>
+                <article class="stack-card" data-stack="postgresql">
+                  <div class="stack-icon">
+                    <img src="assets/postgresql-logo.svg" alt="PostgreSQL 공식 로고" />
+                  </div>
+                  <div><h3>PostgreSQL</h3><p><strong>Message Store</strong>메시지 영속화와 데이터 정합성</p></div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="footer"><span>추진 계획 보고서</span><span>04</span></div>
+        </section>
+
+        <section class="slide" aria-label="5장">
+          <div class="eyebrow">SYSTEM ARCHITECTURE</div>
+          <h1 contenteditable="true">시스템 아키텍쳐</h1>
+          <div class="title-rule"></div>
+          <div class="architecture-visual">
+            <img src="assets/slide5.png" alt="PC와 Mobile 메신저 시스템 아키텍쳐 더미 이미지" />
+          </div>
+          <div class="footer"><span>추진 계획 보고서</span><span>05</span></div>
+        </section>
+      </div>
+    </main>
+
+    <div class="nav" aria-label="슬라이드 탐색">
+      <button class="prev" id="prev" type="button" aria-label="이전 슬라이드">
+        ‹
+      </button>
+      <button class="next" id="next" type="button" aria-label="다음 슬라이드">
+        ›
+      </button>
+    </div>
+    <button class="fullscreen" id="fullscreen" type="button">전체 화면</button>
+    <div class="help">← → 방향키로 이동</div>
+    <div class="counter" id="counter" aria-live="polite">1 / 5</div>
+
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      const slideOrder = [0, 1, 2, 3, 4];
+      const counter = document.getElementById("counter");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      const referenceTable = document.querySelector(".reference-table");
+      const referenceLayout = document.getElementById("referenceLayout");
+      const improvedPanel = document.querySelector(".improved-panel");
+      let index = 0;
+      let referenceTimer;
+      let movingColumn;
+
+      function show(nextIndex) {
+        index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+        const activeSlideIndex = slideOrder[index];
+        slides.forEach((slide, i) =>
+          slide.classList.toggle("active", i === activeSlideIndex),
+        );
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        prev.disabled = index === 0;
+        next.disabled = index === slides.length - 1;
+        if (referenceTable) {
+          clearTimeout(referenceTimer);
+          referenceTable.classList.remove("is-selected");
+          referenceLayout?.classList.remove("is-improved");
+          improvedPanel?.setAttribute("aria-hidden", "true");
+          movingColumn?.remove();
+          movingColumn = null;
+          if (activeSlideIndex === 1) {
+            referenceTimer = setTimeout(() => referenceTable.classList.add("is-selected"), 2000);
+          }
+        }
+      }
+
+      prev.addEventListener("click", () => show(index - 1));
+      next.addEventListener("click", () => show(index + 1));
+      document.addEventListener("keydown", (event) => {
+        if (document.activeElement?.isContentEditable) return;
+        if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          show(index + 1);
+        }
+        if (["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          show(index - 1);
+        }
+        if (event.key === "Home") show(0);
+        if (event.key === "End") show(slides.length - 1);
+      });
+
+      function highlightRoadmapPhase(button) {
+        const phase = button.dataset.phase;
+        document
+          .querySelectorAll(".mile")
+          .forEach((item) => item.classList.toggle("active", item === button));
+        document
+          .querySelectorAll(".road-table tbody tr")
+          .forEach((row) => row.classList.toggle("hit", row.dataset.phase === phase));
+      }
+
+      document.querySelectorAll(".mile").forEach((button) => {
+        button.addEventListener("pointerenter", () => highlightRoadmapPhase(button));
+        button.addEventListener("focus", () => highlightRoadmapPhase(button));
+      });
+
+      function createMovingColumn() {
+        const layoutRect = referenceLayout.getBoundingClientRect();
+        const layer = document.createElement("div");
+        layer.className = "moving-column";
+        layer.setAttribute("aria-hidden", "true");
+
+        const selectedCells = [...referenceTable.querySelectorAll(".selected-column")];
+        selectedCells.forEach((cell, cellIndex) => {
+          const rect = cell.getBoundingClientRect();
+          const styles = getComputedStyle(cell);
+          const movingCell = document.createElement("div");
+          movingCell.className = "moving-cell";
+          movingCell.innerHTML = cell.innerHTML;
+          movingCell.style.left = `${rect.left - layoutRect.left}px`;
+          movingCell.style.top = `${rect.top - layoutRect.top}px`;
+          movingCell.style.width = `${rect.width}px`;
+          movingCell.style.height = `${rect.height}px`;
+          movingCell.style.setProperty("--move-x", `${-(rect.left - layoutRect.left)}px`);
+          [
+            "padding", "color", "backgroundColor", "fontSize", "fontWeight",
+            "lineHeight", "textAlign", "letterSpacing",
+          ].forEach((property) => { movingCell.style[property] = styles[property]; });
+
+          // A positioned div does not inherit the table's border-collapse behavior.
+          // Rebuild the selected-column frame explicitly so every cell keeps the
+          // same blue outer edge and the same gray horizontal dividers after moving.
+          const isFirstCell = cellIndex === 0;
+          const isLastCell = cellIndex === selectedCells.length - 1;
+          const dividerColor = styles.borderBottomColor;
+          movingCell.style.backgroundColor = "#e8f2fb";
+          movingCell.style.border = "0";
+          movingCell.style.borderBottom = isLastCell ? "0" : `1px solid ${dividerColor}`;
+          movingCell.style.boxShadow = [
+            "inset 3px 0 0 #2468a9",
+            "inset -3px 0 0 #2468a9",
+            isFirstCell ? "inset 0 3px 0 #2468a9" : "",
+            isLastCell ? "inset 0 -3px 0 #2468a9" : "",
+          ].filter(Boolean).join(", ");
+          layer.appendChild(movingCell);
+        });
+
+        referenceLayout.appendChild(layer);
+        return layer;
+      }
+
+      referenceLayout?.addEventListener("click", () => {
+        if (!referenceTable?.classList.contains("is-selected")) return;
+        if (referenceLayout.classList.contains("is-improved")) return;
+        movingColumn = createMovingColumn();
+        referenceLayout.classList.add("is-improved");
+        improvedPanel?.setAttribute("aria-hidden", "false");
+      });
+
+      document.getElementById("fullscreen").addEventListener("click", () => {
+        document.fullscreenElement
+          ? document.exitFullscreen()
+          : document.documentElement.requestFullscreen();
+      });
+      let touchX = 0;
+      document.addEventListener(
+        "touchstart",
+        (event) => {
+          touchX = event.touches[0].clientX;
+        },
+        { passive: true },
+      );
+      document.addEventListener(
+        "touchend",
+        (event) => {
+          const deltaX = event.changedTouches[0].clientX - touchX;
+          if (Math.abs(deltaX) > 50) show(index + (deltaX < 0 ? 1 : -1));
+        },
+        { passive: true },
+      );
+      show(0);
+    </script>
+  </body>
+</html>

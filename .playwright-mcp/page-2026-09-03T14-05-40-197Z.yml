@@ -1,0 +1,172 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - generic [ref=f3e3]:
+      - region "1장":
+        - generic: BACKGROUND & CURRENT STATUS
+        - heading "추진 배경 / 현황" [level=1]
+        - generic:
+          - table:
+            - rowgroup:
+              - row "구분 A시스템 현행 방식 B시스템 개선 방식":
+                - columnheader "구분"
+                - columnheader "A시스템 현행 방식": A시스템현행 방식
+                - columnheader "B시스템 개선 방식": B시스템개선 방식
+            - rowgroup:
+              - row "운영 방식 현재 운영 프로세스 및 담당 체계 중심 개선 프로세스와 역할 체계를 표준화":
+                - rowheader "운영 방식"
+                - cell "현재 운영 프로세스 및 담당 체계 중심"
+                - cell "개선 프로세스와 역할 체계를 표준화"
+              - row "주요 특징 기존 환경을 중심으로 운영하며 적용 범위가 제한적 표준화·자동화를 통해 운영 범위와 효율을 확대":
+                - rowheader "주요 특징"
+                - cell "기존 환경을 중심으로 운영하며 적용 범위가 제한적"
+                - cell "표준화·자동화를 통해 운영 범위와 효율을 확대"
+              - row "업무 처리 반복 업무와 수작업 확인 절차가 상대적으로 많음 업무 흐름을 단순화하고 처리 과정을 체계화":
+                - rowheader "업무 처리"
+                - cell "반복 업무와 수작업 확인 절차가 상대적으로 많음"
+                - cell "업무 흐름을 단순화하고 처리 과정을 체계화"
+              - row "관리 및 성과 관리 정보가 분산되어 현황 파악과 성과 측정에 한계 가시성·정확성을 높이고 안정적인 운영 정착을 지원":
+                - rowheader "관리 및 성과"
+                - cell "관리 정보가 분산되어 현황 파악과 성과 측정에 한계"
+                - cell "가시성·정확성을 높이고 안정적인 운영 정착을 지원"
+        - generic:
+          - generic: 추진 계획 보고서
+          - generic: "01"
+      - region "2장" [ref=f3e40]:
+        - generic [ref=f3e41]: REFERENCE
+        - heading "과거 자료" [level=1] [ref=f3e42]
+        - paragraph [ref=f3e44]: A팀과 B팀의 안별 비교 결과 · 3안 강조 후 클릭하면 개선안이 나타납니다.
+        - generic [ref=f3e45]:
+          - table [ref=f3e47]:
+            - rowgroup [ref=f3e48]:
+              - row [ref=f3e49]:
+                - columnheader [ref=f3e50]
+                - columnheader "A팀" [ref=f3e51]
+                - columnheader "B팀" [ref=f3e52]
+              - row [ref=f3e53]:
+                - columnheader [ref=f3e54]
+                - columnheader "1안" [ref=f3e55]
+                - columnheader "2안" [ref=f3e56]
+                - columnheader "3안" [ref=f3e57]
+                - columnheader "4안" [ref=f3e58]
+            - rowgroup [ref=f3e59]:
+              - row [ref=f3e60]:
+                - rowheader "비교1" [ref=f3e61]
+                - cell "123123" [ref=f3e62]
+                - cell "123" [ref=f3e63]
+                - cell "123" [ref=f3e64]
+                - cell "123" [ref=f3e65]
+              - row [ref=f3e66]:
+                - rowheader "비교2" [ref=f3e67]
+                - cell "123123" [ref=f3e68]
+                - cell "123123" [ref=f3e69]
+                - cell "123123" [ref=f3e70]
+                - cell "123123" [ref=f3e71]
+              - row [ref=f3e72]:
+                - rowheader "비교3" [ref=f3e73]
+                - cell "123123" [ref=f3e74]
+                - cell "1231" [ref=f3e75]
+                - cell "123123" [ref=f3e76]
+                - cell "1231" [ref=f3e77]
+              - row [ref=f3e78]:
+                - rowheader "비교4" [ref=f3e79]
+                - cell [ref=f3e80]
+                - cell "123" [ref=f3e81]
+                - cell "123123" [ref=f3e82]
+                - cell "123" [ref=f3e83]
+          - generic [aria-hidden] [ref=f3e84]:
+            - generic [ref=f3e85]: UPGRADED SOLUTION
+            - heading [level=2] [ref=f3e86]: 3안 기반 개선안
+            - paragraph [ref=f3e87]: 선택된 3안을 바탕으로 운영 효율과 관리 가시성을 한 단계 더 높입니다.
+            - list [ref=f3e88]:
+              - listitem [ref=f3e89]: 핵심 절차 통합 및 중복 업무 축소
+              - listitem [ref=f3e90]: 자동 집계와 실시간 현황 제공
+              - listitem [ref=f3e91]: 성과 지표 기반 지속 개선
+        - generic [ref=f3e92]:
+          - generic [ref=f3e93]: 추진 계획 보고서
+          - generic [ref=f3e94]: "02"
+      - region "3장":
+        - generic: IMPLEMENTATION PLAN
+        - heading "추진 일정 / Roadmap" [level=1]
+        - generic:
+          - generic:
+            - button "착수 1단계":
+              - strong: 착수
+              - text: 1단계
+            - button "현황 분석 2단계":
+              - strong: 현황 분석
+              - text: 2단계
+            - button "설계 3단계":
+              - strong: 설계
+              - text: 3단계
+            - button "실행 4단계":
+              - strong: 실행
+              - text: 4단계
+            - button "안정화 5단계":
+              - strong: 안정화
+              - text: 5단계
+        - table:
+          - rowgroup:
+            - row "단계 추진 구간 주요 수행 내용 일정":
+              - columnheader "단계"
+              - columnheader "추진 구간"
+              - columnheader "주요 수행 내용"
+              - columnheader "일정"
+          - rowgroup:
+            - row "01 착수 및 범위 확정 목표·범위 정의, 이해관계자 협의 W1":
+              - cell "01"
+              - cell "착수 및 범위 확정"
+              - cell "목표·범위 정의, 이해관계자 협의"
+              - cell "W1"
+            - row "02 현황·이슈 분석 기존 프로세스 진단, 개선 과제 도출 W2–W3":
+              - cell "02"
+              - cell "현황·이슈 분석"
+              - cell "기존 프로세스 진단, 개선 과제 도출"
+              - cell "W2–W3"
+            - row "03 상세 설계 목표 프로세스 및 실행 방안 구체화 W4–W5":
+              - cell "03"
+              - cell "상세 설계"
+              - cell "목표 프로세스 및 실행 방안 구체화"
+              - cell "W4–W5"
+            - row "04 실행 및 검증 단계별 적용, 결과 검증 및 보완 W6–W8":
+              - cell "04"
+              - cell "실행 및 검증"
+              - cell "단계별 적용, 결과 검증 및 보완"
+              - cell "W6–W8"
+            - row "05 안정화 운영 전환, 성과 평가 및 지속 관리 W9":
+              - cell "05"
+              - cell "안정화"
+              - cell "운영 전환, 성과 평가 및 지속 관리"
+              - cell "W9"
+        - generic:
+          - generic: 마일스톤을 선택하면 관련 일정이 강조됩니다.
+          - generic: "03"
+      - region "4장":
+        - generic: SECTION 04
+        - heading "제목을 입력하세요" [level=1]
+        - generic:
+          - generic:
+            - heading "핵심 메시지" [level=2]
+            - paragraph: 보고서의 주요 내용과 근거를 입력하세요.· 핵심 내용 1· 핵심 내용 2· 핵심 내용 3
+          - generic: 도표 또는 이미지 영역
+        - generic:
+          - generic: 추진 계획 보고서
+          - generic: "04"
+      - region "5장":
+        - generic: SECTION 05
+        - heading "제목을 입력하세요" [level=1]
+        - generic:
+          - generic:
+            - heading "내용 영역 A" [level=2]
+            - paragraph: 필요한 내용을 입력하세요.
+          - generic:
+            - heading "내용 영역 B" [level=2]
+            - paragraph: 필요한 내용을 입력하세요.
+        - generic:
+          - generic: 추진 계획 보고서
+          - generic: "05"
+  - generic "슬라이드 탐색":
+    - button "이전 슬라이드" [ref=f3e35] [cursor=pointer]: ‹
+    - button "다음 슬라이드" [ref=f3e36] [cursor=pointer]: ›
+  - button "전체 화면" [ref=f3e37] [cursor=pointer]
+  - generic [ref=f3e38]: ← → 방향키로 이동
+  - generic [ref=f3e39]: 2 / 5
